@@ -1,25 +1,5 @@
 version: "3"
 services:
-  boilerplate-api:
-    build: .
-    environment:
-      - MONGO_URI=mongodb://mongodb:27017/khkt
-      - PORT=3000
-      - JWT_SECRET=bA2xcjpf8y5aSUFsNB2qN5yymUBSs6es3qHoFpGkec75RCeBb8cpKauGefw5qy4
-      - JWT_EXPIRATION_MINUTES=525600
-      - MONGO_URI_TESTS=mongodb://mongodb:27017/khkt
-      - EMAIL_PORT=1883
-      - EMAIL_HOST=mail.evscare.com
-      - EMAIL_USERNAME=username
-      - EMAIL_PASSWORD=password
-    volumes:
-      - .:/app
-    ports:
-      - "3000:3000"
-    depends_on:
-      - mongodb
-      - mosquitto
-
   mongodb:
     image: mongo
     ports:
