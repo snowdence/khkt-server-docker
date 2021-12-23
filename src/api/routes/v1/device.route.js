@@ -25,10 +25,10 @@ router
       let user_trans = req.user.transform();
 
       let { macAddr, ipAddr, deviceId, deviceName } = req.body;
-      let record_check_exist = await Device.findOne({ macAddr }).lean();
+      let record_check_exist = await Device.findOne({ macAddr }).exec();
       if (record_check_exist) {
         console.log("existed,no created");
-
+        record_check_exist = record_check_exist.transform();
         return res.json({
           user: user_trans,
           device: record_check_exist,
