@@ -16,8 +16,9 @@ router.route("/").get(controller.list).post(controller.create);
 router
   .route("/:deviceId")
   .get(authorize(LOGGED_USER), controller.get)
-  .delete(authorize(LOGGED_USER), controller.remove);
+  .delete(controller.remove);
 
+router.route("/:deviceId/delete").get(controller.remove);
 router
   .route("/addDevice")
   .post(authorize(LOGGED_USER), async function (req, res) {
