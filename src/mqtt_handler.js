@@ -35,22 +35,35 @@ class MqttHandler {
 
     // When a message arrives, console.log it
     this.mqttClient.on("message", function (topic, message) {
-      let parseTopic = topic.split("/");
-      let msgStr = message.toString();
-      if (msgStr.startsWith("cs_report")) {
-        //Device.findById(parseTopic[1], function (err, cur) {
-        let deviceObj = {
-          deviceId: ObjectId(parseTopic[1].toString()),
-          rawData: msgStr,
-        };
-        const sensorData = new SensorData(deviceObj);
-        sensorData
-          .save()
-          .then((sensorData) => console.log("Saved sensor data"))
-          .catch((e) => console.log("Co loi xay ra khi save sensor data", e));
-        //});
+      try {
+        console.log(
+          `[Received] : ${topic.toString()} => ${message.toString()} `
+        );
+
+        if (topic.includes("/")) {
+          let parseTopic = topic.split("/");
+
+          let msgStr = message.toString();
+          if (msgStr.startsWith("cs_report")) {
+            //Device.findById(parseTopic[1], function (err, cur) {
+            let deviceObj = {
+              deviceId: ObjectId(parseTopic[1].toString()),
+              rawData: msgStr,
+            };
+            const sensorData = new SensorData(deviceObj);
+            sensorData
+              .save()
+              .then((sensorData) => console.log("Saved sensor data"))
+              .catch((e) =>
+                console.log("Co loi xay ra khi save sensor data", e)
+              );
+            //});
+          }
+          console.log(msgStr.toString());
+        }
+      } catch (err) {
+        console.log("onMessage", err);
       }
-      console.log(msgStr.toString());
     });
 
     this.mqttClient.on("close", () => {
@@ -63,7 +76,11 @@ class MqttHandler {
   // Sends a mqtt message to topic: mytopic
   sendMessage(topic, message) {
     console.log("Da publish ", message);
-    this.mqttClient.publish(topic, message);
+    try {
+      this.mqttClient.publish(topic, message);
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 

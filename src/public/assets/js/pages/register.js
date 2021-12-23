@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
   console.log("List devices");
 
-  var frm = $("#frmLogin");
+  var frm = $("#frmRegister");
 
   frm.submit(function (e) {
     e.preventDefault();
     let email = $("#email").val();
     let password = $("#password").val();
-    fetch("v1/auth/login", {
+    fetch("v1/auth/register", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -24,9 +24,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }),
     })
       .then(function (response) {
-        if (response.status === 401) {
-          swal("Lỗi", "Kiểm tra tên tài khoản hoặc mật khẩu", "error");
+        if (response.status !== 200) {
+          swal("Lỗi", "Tài khoản đã bị trùng hoặc có lỗi xảy ra", "error");
+          throw "Kiểm tra tài khoản";
         }
+        console.log(response.data);
 
         return response;
       })

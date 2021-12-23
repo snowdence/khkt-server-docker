@@ -81,10 +81,10 @@ exports.list = async (req, res, next) => {
  * @public
  */
 exports.remove = (req, res, next) => {
-  const { user } = req.locals;
+  const { device } = req.locals;
 
-  user
+  device
     .remove()
-    .then(() => res.status(httpStatus.NO_CONTENT).end())
+    .then(() => res.status(httpStatus.OK).end())
     .catch((e) => next(e));
 };

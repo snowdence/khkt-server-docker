@@ -14,6 +14,10 @@ router.get("/register", (req, res) => {
   });
 });
 
+router.get("/", (req, res) => {
+  res.redirect("/dashboard");
+});
+
 router.get("/dashboard", (req, res) => {
   let { deviceId } = req.query;
   if (typeof deviceId !== "undefined") {
