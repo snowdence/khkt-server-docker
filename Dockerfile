@@ -15,4 +15,4 @@ ADD . /app
 RUN rm -f yarn.lock
 RUN rm -f package.lock
 
-CMD ["npm", "run docker:start"]
+CMD ["yarn", "start"]
