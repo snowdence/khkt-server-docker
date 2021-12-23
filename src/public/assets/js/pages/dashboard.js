@@ -204,6 +204,16 @@ $(document).ready(function () {
         lastDataParsed.mua == true ? "Đang mưa" : "Đang không mưa";
       document.getElementById("giatri_automode").innerText =
         lastDataParsed.auto_mode == true ? "Đang bật" : "Đang tắt";
+
+      document.getElementById("giatri_bom").innerText =
+        lastDataParsed.bom == true ? "Đang bật" : "Đang tắt";
+
+      document.getElementById("giatri_quat").innerText =
+        lastDataParsed.quat == true ? "Đang bật" : "Đang tắt";
+      document.getElementById("giatri_den1").innerText =
+        lastDataParsed.den1 == true ? "Đang bật" : "Đang tắt";
+      document.getElementById("giatri_den2").innerText =
+        lastDataParsed.den2 == true ? "Đang bật" : "Đang tắt";
     }
     window.setInterval(function () {
       fetch("/v1/devices/sensorData", {
