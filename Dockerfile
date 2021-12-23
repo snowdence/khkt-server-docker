@@ -9,7 +9,8 @@ RUN mkdir /app
 WORKDIR /app
 
 ADD package.json /app/
-RUN yarn --pure-lockfile
+RUN npm install
+RUN npm install cross-env
 ADD . /app
 
-CMD ["yarn", "docker:start"]
+CMD ["npm", "run docker:start"]
