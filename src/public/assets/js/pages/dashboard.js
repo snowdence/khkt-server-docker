@@ -285,4 +285,27 @@ $(document).ready(function () {
   document.getElementById("btn-turn-off-den2").addEventListener("click", () => {
     publishCommand("cmd_relay|6|1");
   });
+
+  document
+    .getElementById("btn_limit_temperature")
+    .addEventListener("click", () => {
+      let val = document.getElementById("limit_temperature").value;
+      publishCommand("cd_nhietdo|" + val);
+    });
+
+  document
+    .getElementById("btn_limit_soil_humid")
+    .addEventListener("click", () => {
+      let val = document.getElementById("limit_soil_humid").value;
+      publishCommand("cd_doamdat|" + val);
+    });
+
+  document.getElementById("btn_limit_light").addEventListener("click", () => {
+    let val = document.getElementById("limit_light").value;
+    publishCommand("cd_anhsang1|" + val);
+  });
+  document.getElementById("btn_limit_light_2").addEventListener("click", () => {
+    let val = document.getElementById("limit_light_2").value;
+    publishCommand("cd_anhsang1|" + val);
+  });
 });
