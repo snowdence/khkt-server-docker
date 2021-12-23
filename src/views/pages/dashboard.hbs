@@ -1,0 +1,300 @@
+{{#section "script"}}
+<script src="vendors/charts/apex/apexcharts.min.js"></script>
+<script src="assets/js/pages/dashboard.js"></script>
+
+<!-- Apex Chart -->
+<script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>
+
+<!-- Prism -->
+<script src="vendors/prism/prism.js"></script>
+{{/section}}
+
+<!-- Content -->
+<div class="content">
+
+  <div class="page-header">
+    <div>
+      <h3>Thông số thiết bị</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Biểu đồ thông số cảm biến</h6>
+
+              <div class="card">
+                <div class="card-body">
+                  {{!-- <button type="button" class="btn btn-success btn-sm" id="btn_update_chart">Cập nhật</button>
+                  --}}
+                  <div id="apex_chart_three" style="height: 300px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-6">
+      <div class="row">
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Nhiệt độ</h6>
+              <div class="d-flex align-items-center mb-3">
+                <div>
+                  <div class="avatar">
+                    <span class="avatar-title bg-primary-bright text-primary rounded-pill">
+                      <i class="ti-pin"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3" id="giatri_nhietdo">0 °C</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Độ ẩm không khí</h6>
+              <div class="d-flex align-items-center mb-3">
+                <div>
+                  <div class="avatar">
+                    <span class="avatar-title bg-primary-bright text-primary rounded-pill">
+                      <i class="ti-cloud"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3" id="giatri_doam">0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Độ ẩm đất</h6>
+              <div class="d-flex align-items-center mb-3">
+                <div>
+                  <div class="avatar">
+                    <span class="avatar-title bg-primary-bright text-primary rounded-pill">
+                      <i class="ti-paint-bucket"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3" id="giatri_doamdat">0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Ánh sáng</h6>
+              <div class="d-flex align-items-center mb-3">
+                <div>
+                  <div class="avatar">
+                    <span class="avatar-title bg-primary-bright text-primary rounded-pill">
+                      <i class="ti-light-bulb"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3" id="giatri_anhsang">0 lux</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Cảm biến mưa</h6>
+              <div class="d-flex align-items-center mb-3">
+                <div>
+                  <div class="avatar">
+                    <span class="avatar-title bg-primary-bright text-primary rounded-pill">
+                      <i class="ti-soundcloud"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3" id="giatri_mua">Đang mưa</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">Điều khiển thiết bị</h6>
+
+          <div class="row">
+            <div class="col-lg-12">
+
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Chế độ auto
+                  <div class="control-setting-right">
+                    <span class="badge badge-primary badge-pill" id="giatri_automode">Đang bật</span>
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-success" id="btn-turn-on-auto">
+                        <i class="ti-plug"></i>
+                      </button>
+                      <button type="button" class="btn btn-danger" id="btn-turn-off-auto">
+                        <i class="ti-power-off"></i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Bơm
+                  <div class="control-setting-right">
+                    <span class="badge badge-primary badge-pill">Đang bật</span>
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-success" id="btn-turn-on-bom">
+                        <i class="ti-plug"></i>
+                      </button>
+                      <button type="button" class="btn btn-danger" id="btn-turn-off-bom">
+                        <i class="ti-power-off"></i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Quạt
+                  <div class="control-setting-right">
+                    <span class="badge badge-primary badge-pill">Đang bật</span>
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-success" id="btn-turn-on-quat">
+                        <i class="ti-plug"></i>
+                      </button>
+                      <button type="button" class="btn btn-danger" id="btn-turn-off-quat">
+                        <i class="ti-power-off"></i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Đèn 1
+                  <div class="control-setting-right">
+                    <span class="badge badge-primary badge-pill">Đang bật</span>
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-success" id="btn-turn-on-den1">
+                        <i class="ti-plug"></i>
+                      </button>
+                      <button type="button" class="btn btn-danger" id="btn-turn-off-den1">
+                        <i class="ti-power-off"></i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Đèn 2
+                  <div class="control-setting-right">
+                    <span class="badge badge-primary badge-pill">Đang bật</span>
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-success" id="btn-turn-on-den2">
+                        <i class="ti-plug"></i>
+                      </button>
+                      <button type="button" class="btn btn-danger" id="btn-turn-off-den2">
+                        <i class="ti-power-off"></i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-6">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+
+              <div class="card-title mb-2 d-md-flex justify-content-between">Cài Đặt
+                <div class="mt-3 mt-md-0">
+                  {{!-- <button type="button" class="btn btn-success">Lưu</button> --}}
+
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <label for="limit_temperature">Giới hạn nhiệt độ</label>
+                <div class="row">
+                  <div class="col-lg-9"> <input class="form-control" type="text" placeholder="nhiệt độ"
+                      name="limit_temperature" />
+                  </div>
+                  <div class="col-lg-3"> <button type="button" class="btn btn-success">Lưu</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <label for="limit_soil_temperature">Giới hạn độ ẩm đất</label>
+                <div class="row">
+                  <div class="col-lg-9"> <input class="form-control" type="text" placeholder="% độ ẩm đất"
+                      name="limit_soil_temperature" />
+
+                  </div>
+                  <div class="col-lg-3"> <button type="button" class="btn btn-success">Lưu</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="limit_light">Giới hạn ánh sáng</label>
+                <div class="row">
+                  <div class="col-lg-9">
+                    <input class="form-control" type="text" placeholder="lux" name="limit_light" />
+                  </div>
+                  <div class="col-lg-3"> <button type="button" class="btn btn-success">Lưu</button>
+                  </div>
+
+
+                </div>
+
+                <div class="form-group">
+                  <label for="limit_light_2">Giới hạn ánh sáng 2</label>
+                  <div class="row">
+                    <div class="col-lg-9">
+                      <input class="form-control" type="text" placeholder="lux" name="limit_light_2" />
+                    </div>
+                    <div class="col-lg-3"> <button type="button" class="btn btn-success">Lưu</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <!-- ./ Content -->
+    </div>

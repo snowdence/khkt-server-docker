@@ -1,0 +1,52 @@
+version: "3"
+services:
+  boilerplate-api:
+    command: yarn dev -- -L
+    build: .
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongodb:admin@mongodb:27017/khkt?authSource=admin
+      - PORT=3000
+      - JWT_SECRET=bA2xcjpf8y5aSUFsNB2qN5yymUBSs6es3qHoFpGkec75RCeBb8cpKauGefw5qy4
+      - JWT_EXPIRATION_MINUTES=525600
+      - MONGO_URI_TESTS=mongodb://mongodb:admin@mongodb:27017/khkt?authSource=admin
+      - EMAIL_PORT=1883
+      - EMAIL_HOST=mail.evscare.com
+      - EMAIL_USERNAME=username
+      - EMAIL_PASSWORD=password
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=khkt
+      - MONGO_INITDB_ROOT_USERNAME=mongodb
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      # seeding scripts
+      #- ./mongo-entrypoint:/docker-entrypoint-initdb.d
+      # named volumes
+      - ./mongodb/mongodb:/data/db
+      - ./mongodb/mongoconfig:/data/configdb
+  mosquitto:
+    build:
+      context: ./mosquitto
+      dockerfile: Dockerfile
+      args:
+        - MOSQUITTO_VERSION=${MOSQUITTO_VERSION:-latest}
+    environment:
+      - MOSQUITTO_USERNAME=${MOSQUITTO_USERNAME}
+      - MOSQUITTO_PASSWORD=${MOSQUITTO_PASSWORD}
+    image: eclipse-mosquitto:${MOSQUITTO_VERSION:-latest}
+    container_name: eclipse-mosquitto
+    restart: always
+    volumes:
+      - ./data:/mosquitto/data
+      - ./log:/mosquitto/log
+    ports:
+      - 1883:1883
