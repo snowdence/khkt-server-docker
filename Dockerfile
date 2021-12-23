@@ -10,7 +10,7 @@ WORKDIR /app
 
 ADD package.json /app/
 RUN npm install
-RUN npm install cross-env
+RUN npm install -g cross-env
 ADD . /app
 
 CMD ["npm", "run docker:start"]
