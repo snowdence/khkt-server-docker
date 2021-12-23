@@ -125,16 +125,16 @@ $(document).ready(function () {
         data.temperature = ap[2];
         data.humid_soil = ap[3];
         data.lux = ap[4];
-        data.bom = +ap[5] === 1 ? false : true;
-        data.quat = +ap[6] === 1 ? false : true;
-        data.den1 = +ap[7] === 1 ? false : true;
-        data.den2 = +ap[8] === 1 ? false : true;
+        data.bom = ap[5] == "1" ? false : true;
+        data.quat = ap[6] == "1" ? false : true;
+        data.den1 = ap[7] == "1" ? false : true;
+        data.den2 = ap[8] == "1" ? false : true;
         data.conf_gh_doam = ap[9];
         data.conf_gh_doam = ap[10];
         data.conf_gh_doam = ap[11];
         data.conf_gh_doam = ap[12];
-        data.mua = +ap[13] === 1 ? true : false;
-        data.auto_mode = +ap[14] === 1 ? true : false;
+        data.mua = ap[13] == "1" ? true : false;
+        data.auto_mode = ap[14] == "1" ? true : false;
       }
       return data;
     }
